@@ -380,7 +380,7 @@ def main(argv):
                                      args.patch, s=2, factor=factor, factormode=args.factormode)
                 for k, v in metrics.items():
                     results[k].append(v)
-    elif 0<=args.s<=model.levels:
+    elif 0<=args.s<model.levels:
             metrics = eval_model(model, filepaths, args.entropy_estimation, args.half,
                                  args.output_path + '_s_' + str(args.s),
                                  args.patch, args.s, factor=0, factormode=0)
