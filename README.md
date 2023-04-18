@@ -26,7 +26,25 @@ pip install pybind11
 pip install ptflops
 ```
 
+$$Usage
+### Training
+stage 1
+```
+python train.py -d ./dataset  -e 2000 -lr 1e-4 -n 8 --batch-size 8 --test-batch-size 64 --aux-learning-rate 1e-3 --patch-size 256 256 --cuda --save --seed 1926 --clip_max_norm 1.0  --stage 1 --ste 0  --loadFromPretrainedSinglemodel 0
+```
+stage 2
+```
+python3 train.py  -d ./dataset  -e 500 -lr 1e-4 -n 8 --batch-size 8 --test-batch-size 64 --aux-learning-rate 1e-3 --patch-size 256 256 --cuda --save --seed 1926 --clip_max_norm 1.0  --stage 2 --ste 0  --refresh 1 --loadFromPretrainedSinglemodel 0 --checkpoint checkpoint_best_loss.pth.tar
+```
+stage 3
+```
+python3 train.py  -d ./dataset  -e 500 -lr 1e-4 -n 8 --batch-size 8 --test-batch-size 64 --aux-learning-rate 1e-3 --patch-size 256 256 --cuda --save --seed 1926 --clip_max_norm 1.0  --stage 3 --ste 1 --refresh 1 --loadFromPretrainedSinglemodel 0 --checkpoint checkpoint_best_loss.pth.tar
+```
 
+###Inference
+```
+python3 Inference.py --dataset ./dataset/Kodak --s 8 --output_path ELICVR -p ./checkpoint_best_loss.pth.tar --patch 64 --factormode 0 --factor 0
+```
 ## Citation
 ```
 @inproceedings{he2022elic,
